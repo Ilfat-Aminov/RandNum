@@ -2,6 +2,7 @@ package com.example.user.test0;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,10 +37,31 @@ public class MainActivity extends AppCompatActivity {
         }
         Arrays.sort(numbers);
         StringBuilder sb = new StringBuilder();
+        int color = 0;
+        int colorMultiplier = 1;
+        sb.append("</font> <font color=#0000ff>");
         for (int i = 0; i < number; i++){
+            if ((numbers[i] > 100 * colorMultiplier) && (color < 1)) {
+                sb.append("</font> <font color=#00ff00>");
+                color++;
+            }
+            if ((numbers[i] > 100 + 100 * colorMultiplier) && (color < 2)) {
+                sb.append("</font> <font color=#800080>");
+                color++;
+            }
+            if ((numbers[i] > 200 + 100 * colorMultiplier) && (color < 3)) {
+                sb.append("</font> <font color=#ff0000>");
+                color++;
+            }
+            if ((numbers[i] > 300 + 100 * colorMultiplier) && (color < 4)) {
+                sb.append("</font> <font color=#0000ff>");
+                color = 0;
+                colorMultiplier += 4;
+            }
             sb.append(Integer.toString(numbers[i]));
             sb.append("  ");
         }
-        textView.setText(sb);
+        sb.append("</font>");
+        textView.setText(Html.fromHtml(sb.toString()));
      }
 }
