@@ -11,7 +11,7 @@
         android:layout_width="337dp"
         android:layout_height="201dp"
         android:layout_marginBottom="8dp"
-        android:text="Hello World!"
+        android:text="Random proga v0.1"
         android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,13 +31,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:text="1"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.504"
-        tools:text="1" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <EditText
         android:id="@+id/editText2"
