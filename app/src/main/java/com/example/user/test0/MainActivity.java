@@ -1,6 +1,8 @@
 package com.example.user.test0;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
         editText3 = findViewById(R.id.editText3);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onClick(View view) {
         InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),  InputMethodManager.HIDE_NOT_ALWAYS);
+        if (inputManager != null) {
+            inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),  InputMethodManager.HIDE_NOT_ALWAYS);
+        }
         Random random = new Random();
         try {
             Integer number = Integer.parseInt((editText3.getText().toString()));
@@ -42,34 +48,16 @@ public class MainActivity extends AppCompatActivity {
             }
             Arrays.sort(numbers);
             StringBuilder sb = new StringBuilder();
-            int color = 0;
-            int colorMultiplier = 1;
-            sb.append("<font color=#0000ff>");
+            int colorInt;
+            String colorCode;
             for (int i = 0; i < number; i++){
-                if ((numbers[i] > 100 * colorMultiplier) && (color < 1)) {
-                    sb.append("</font> <font color=#00ff00>");
-                    color++;
-                }
-                if ((numbers[i] > 100 + 100 * colorMultiplier) && (color < 2)) {
-                    sb.append("</font> <font color=#800080>");
-                    color++;
-                }
-                if ((numbers[i] > 200 + 100 * colorMultiplier) && (color < 3)) {
-                    sb.append("</font> <font color=#ff0000>");
-                    color++;
-                }
-                if ((numbers[i] > 300 + 100 * colorMultiplier) && (color < 4)) {
-                    sb.append("</font> <font color=#0000ff>");
-                    color = 0;
-                    colorMultiplier += 4;
-                }
-                sb.append(Integer.toString(numbers[i]));
-                sb.append("  ");
+                colorInt = random.nextInt(0xffffff + 1);
+                colorCode = String.format("#%06x", colorInt);
+                sb.append("<font color=").append(colorCode).append(">").append(Integer.toString(numbers[i])).append("  </font>");
             }
-            sb.append("</font>");
             textView.setText(Html.fromHtml(sb.toString()));
         } catch (Exception e) {
-            textView.setText(Html.fromHtml("<font color=#ff0000> SOMETHING WRONG, BLET(((</font>"));
+            textView.setText(Html.fromHtml("<font color=#ff0000> Произошёл еггог! </font>"));
         }
      }
 }
