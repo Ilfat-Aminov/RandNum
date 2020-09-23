@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Random random = new Random();
         try {
-            Integer number = Integer.parseInt((editText3.getText().toString()));
+            int number = Integer.parseInt((editText3.getText().toString()));
             int[] numbers = new int[number];
             for (int i = 0; i < number; i++) {
                 numbers[i] = Integer.parseInt(editText1.getText().toString()) + random.nextInt(Integer.parseInt(editText2.getText().toString()) + 1 - Integer.parseInt(editText1.getText().toString()));
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < number; i++){
                 colorInt = random.nextInt(0xffffff + 1);
                 colorCode = String.format("#%06x", colorInt);
-                sb.append("<font color=").append(colorCode).append(">").append(Integer.toString(numbers[i])).append("  </font>");
+                sb.append("<font color=").append(colorCode).append(">").append(numbers[i]).append("  </font>");
             }
             textView.setText(Html.fromHtml(sb.toString()));
         } catch (Exception e) {
